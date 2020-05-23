@@ -1,5 +1,20 @@
+buildscript {
+	repositories {
+		maven {
+			url 'https://plugins.gradle.org/m2/'
+		}
+	}
+	dependencies {
+		classpath 'org.openjfx:javafx-plugin:0.0.8'
+	}
+}
+
 plugins {
 	id 'java'
+}
+
+if (JavaVersion.current().java11Compatible) {
+	apply plugin: 'org.openjfx.javafxplugin'
 }
 
 group = 'de.unikassel.se.dpss20'
@@ -16,4 +31,10 @@ repositories {
 dependencies {
 	// https://mvnrepository.com/artifact/junit/junit
 	testCompile group: 'junit', name: 'junit', version: '4.13'
+}
+
+if (JavaVersion.current().java11Compatible) {
+	javafx {
+		modules 'javafx.graphics', 'javafx.fxml', 'javafx.base', 'javafx.controls'
+	}
 }
